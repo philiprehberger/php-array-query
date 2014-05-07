@@ -1,0 +1,39 @@
+{
+    "name": "philiprehberger/php-array-query",
+    "description": "SQL-like fluent query builder for filtering, sorting, and transforming arrays",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "array",
+        "query",
+        "filter",
+        "sort",
+        "collection"
+    ],
+    "authors": [
+        {
+            "name": "Philip Rehberger"
+        }
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "laravel/pint": "^1.0",
+        "phpstan/phpstan": "^1.12|^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhilipRehberger\\ArrayQuery\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhilipRehberger\\ArrayQuery\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
