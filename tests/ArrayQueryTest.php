@@ -255,6 +255,128 @@ final class ArrayQueryTest extends TestCase
     }
 
     #[Test]
+    public function test_distinct_without_key(): void
+    {
+        $items = [
+            ['name' => 'Alice', 'age' => 30],
+            ['name' => 'Bob', 'age' => 25],
+            ['name' => 'Alice', 'age' => 30],
+            ['name' => 'Bob', 'age' => 25],
+            ['name' => 'Charlie', 'age' => 35],
+        ];
+
+        $results = ArrayQuery::from($items)->distinct()->get();
+
+        $this->assertCount(3, $results);
+        $this->assertSame('Alice', $results[0]['name']);
+        $this->assertSame('Bob', $results[1]['name']);
+        $this->assertSame('Charlie', $results[2]['name']);
+    }
+
+    #[Test]
+    public function test_distinct_with_key(): void
+    {
+        $items = [
+            ['name' => 'Alice', 'city' => 'NYC'],
+            ['name' => 'Bob', 'city' => 'LA'],
+            ['name' => 'Charlie', 'city' => 'NYC'],
+            ['name' => 'Diana', 'city' => 'Chicago'],
+            ['name' => 'Eve', 'city' => 'LA'],
+        ];
+
+        $results = ArrayQuery::from($items)->distinct('city')->get();
+
+        $this->assertCount(3, $results);
+        $this->assertSame('Alice', $results[0]['name']);
+        $this->assertSame('Bob', $results[1]['name']);
+        $this->assertSame('Diana', $results[2]['name']);
+    }
+
+    #[Test]
+    public function test_chunk_even_division(): void
+    {
+        $items = [
+            ['name' => 'Alice'],
+            ['name' => 'Bob'],
+            ['name' => 'Charlie'],
+            ['name' => 'Diana'],
+        ];
+
+        $chunks = ArrayQuery::from($items)->chunk(2);
+
+        $this->assertCount(2, $chunks);
+        $this->assertCount(2, $chunks[0]);
+        $this->assertCount(2, $chunks[1]);
+        $this->assertSame('Alice', $chunks[0][0]['name']);
+        $this->assertSame('Charlie', $chunks[1][0]['name']);
+    }
+
+    #[Test]
+    public function test_chunk_with_remainder(): void
+    {
+        $items = [
+            ['name' => 'Alice'],
+            ['name' => 'Bob'],
+            ['name' => 'Charlie'],
+        ];
+
+        $chunks = ArrayQuery::from($items)->chunk(2);
+
+        $this->assertCount(2, $chunks);
+        $this->assertCount(2, $chunks[0]);
+        $this->assertCount(1, $chunks[1]);
+    }
+
+    #[Test]
+    public function test_chunk_size_larger_than_array(): void
+    {
+        $items = [
+            ['name' => 'Alice'],
+            ['name' => 'Bob'],
+        ];
+
+        $chunks = ArrayQuery::from($items)->chunk(10);
+
+        $this->assertCount(1, $chunks);
+        $this->assertCount(2, $chunks[0]);
+    }
+
+    #[Test]
+    public function test_where_contains(): void
+    {
+        $items = [
+            ['name' => 'Alice', 'tags' => ['php', 'javascript']],
+            ['name' => 'Bob', 'tags' => ['python', 'go']],
+            ['name' => 'Charlie', 'tags' => ['php', 'rust']],
+        ];
+
+        $results = ArrayQuery::from($items)
+            ->where('tags', 'contains', 'php')
+            ->get();
+
+        $this->assertCount(2, $results);
+        $this->assertSame('Alice', $results[0]['name']);
+        $this->assertSame('Charlie', $results[1]['name']);
+    }
+
+    #[Test]
+    public function test_where_not_contains(): void
+    {
+        $items = [
+            ['name' => 'Alice', 'tags' => ['php', 'javascript']],
+            ['name' => 'Bob', 'tags' => ['python', 'go']],
+            ['name' => 'Charlie', 'tags' => ['php', 'rust']],
+        ];
+
+        $results = ArrayQuery::from($items)
+            ->where('tags', 'not_contains', 'php')
+            ->get();
+
+        $this->assertCount(1, $results);
+        $this->assertSame('Bob', $results[0]['name']);
+    }
+
+    #[Test]
     public function test_dot_notation_nested_access(): void
     {
         $items = [

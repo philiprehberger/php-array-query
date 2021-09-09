@@ -113,6 +113,47 @@ ArrayQuery::from($users)->whereBetween('age', 25, 30)->get();
 ArrayQuery::from($users)->where('name', 'like', '%ali%')->get();
 ```
 
+### Distinct
+
+```php
+$items = [
+    ['name' => 'Alice', 'city' => 'NYC'],
+    ['name' => 'Bob', 'city' => 'LA'],
+    ['name' => 'Charlie', 'city' => 'NYC'],
+];
+
+// Remove duplicates by city (keeps first occurrence)
+ArrayQuery::from($items)->distinct('city')->get();
+// [['name' => 'Alice', 'city' => 'NYC'], ['name' => 'Bob', 'city' => 'LA']]
+
+// Remove fully duplicate rows
+ArrayQuery::from($items)->distinct()->get();
+```
+
+### Chunk
+
+```php
+$results = ArrayQuery::from($users)
+    ->sort('age')
+    ->chunk(2);
+// [[['name' => 'Eve', ...], ['name' => 'Bob', ...]], [['name' => 'Diana', ...], ['name' => 'Alice', ...]], [['name' => 'Charlie', ...]]]
+```
+
+### Contains Operator
+
+```php
+$items = [
+    ['name' => 'Alice', 'tags' => ['php', 'javascript']],
+    ['name' => 'Bob', 'tags' => ['python', 'go']],
+];
+
+ArrayQuery::from($items)->where('tags', 'contains', 'php')->get();
+// [['name' => 'Alice', ...]]
+
+ArrayQuery::from($items)->where('tags', 'not_contains', 'php')->get();
+// [['name' => 'Bob', ...]]
+```
+
 ### Dot Notation for Nested Arrays
 
 ```php
@@ -131,7 +172,7 @@ ArrayQuery::from($items)
 | Method | Description |
 |---|---|
 | `ArrayQuery::from(array $items)` | Create a new query from an array of associative arrays |
-| `where(string $key, string $operator, mixed $value)` | Filter by comparison (`=`, `==`, `===`, `!=`, `<>`, `>`, `<`, `>=`, `<=`, `like`, `not like`) |
+| `where(string $key, string $operator, mixed $value)` | Filter by comparison (`=`, `==`, `===`, `!=`, `<>`, `>`, `<`, `>=`, `<=`, `like`, `not like`, `contains`, `not_contains`) |
 | `whereIn(string $key, array $values)` | Filter where value is in list |
 | `whereNotNull(string $key)` | Filter where value is not null |
 | `whereNull(string $key)` | Filter where value is null |
@@ -142,6 +183,8 @@ ArrayQuery::from($items)
 | `select(array $keys)` | Select only specified keys |
 | `pluck(string $key)` | Extract a single column as a flat array |
 | `groupBy(string $key)` | Group results by a key |
+| `distinct(?string $key = null)` | Remove duplicate items, optionally by key |
+| `chunk(int $size)` | Split results into arrays of the given size |
 | `map(callable $fn)` | Transform items with a callback |
 | `first()` | Get the first result or `null` |
 | `last()` | Get the last result or `null` |

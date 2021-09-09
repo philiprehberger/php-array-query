@@ -56,6 +56,8 @@ final class ArrayQuery
                 '<=' => $itemValue <= $value,
                 'like' => is_string($itemValue) && is_string($value) && str_contains(strtolower($itemValue), strtolower(str_replace('%', '', $value))),
                 'not like' => is_string($itemValue) && is_string($value) && ! str_contains(strtolower($itemValue), strtolower(str_replace('%', '', $value))),
+                'contains' => is_array($itemValue) && in_array($value, $itemValue, false),
+                'not_contains' => is_array($itemValue) && ! in_array($value, $itemValue, false),
                 default => throw new InvalidArgumentException("Unsupported operator: '{$operator}'."),
             };
         };
@@ -128,6 +130,34 @@ final class ArrayQuery
         $this->selectKeys = $keys;
 
         return $this;
+    }
+
+    public function distinct(?string $key = null): self
+    {
+        if ($key === null) {
+            $this->items = array_values(array_unique($this->items, SORT_REGULAR));
+        } else {
+            $seen = [];
+            $filtered = [];
+            foreach ($this->items as $item) {
+                $value = $this->resolveKey($item, $key);
+                if (! in_array($value, $seen, true)) {
+                    $seen[] = $value;
+                    $filtered[] = $item;
+                }
+            }
+            $this->items = $filtered;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array<int, array<int, array<string, mixed>>>
+     */
+    public function chunk(int $size): array
+    {
+        return array_chunk($this->execute(), $size);
     }
 
     /**
