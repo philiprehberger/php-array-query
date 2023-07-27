@@ -3,6 +3,7 @@
 [![Tests](https://github.com/philiprehberger/php-array-query/actions/workflows/tests.yml/badge.svg)](https://github.com/philiprehberger/php-array-query/actions/workflows/tests.yml)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/philiprehberger/php-array-query.svg)](https://packagist.org/packages/philiprehberger/php-array-query)
 [![License](https://img.shields.io/github/license/philiprehberger/php-array-query)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
 
 SQL-like fluent query builder for filtering, sorting, and transforming arrays.
 
