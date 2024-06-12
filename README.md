@@ -2,8 +2,7 @@
 
 [![Tests](https://github.com/philiprehberger/php-array-query/actions/workflows/tests.yml/badge.svg)](https://github.com/philiprehberger/php-array-query/actions/workflows/tests.yml)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/philiprehberger/php-array-query.svg)](https://packagist.org/packages/philiprehberger/php-array-query)
-[![License](https://img.shields.io/github/license/philiprehberger/php-array-query)](LICENSE)
-[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
+[![Last updated](https://img.shields.io/github/last-commit/philiprehberger/php-array-query)](https://github.com/philiprehberger/php-array-query/commits/main)
 
 SQL-like fluent query builder for filtering, sorting, and transforming arrays.
 
@@ -205,6 +204,24 @@ vendor/bin/pint --test
 vendor/bin/phpstan analyse
 ```
 
+## Support
+
+If you find this project useful:
+
+⭐ [Star the repo](https://github.com/philiprehberger/php-array-query)
+
+🐛 [Report issues](https://github.com/philiprehberger/php-array-query/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+💡 [Suggest features](https://github.com/philiprehberger/php-array-query/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
+
+❤️ [Sponsor development](https://github.com/sponsors/philiprehberger)
+
+🌐 [All Open Source Projects](https://philiprehberger.com/open-source-packages)
+
+💻 [GitHub Profile](https://github.com/philiprehberger)
+
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/philiprehberger)
+
 ## License
 
-MIT
+[MIT](LICENSE)
