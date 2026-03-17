@@ -1,8 +1,8 @@
 # PHP Array Query
 
 [![Tests](https://github.com/philiprehberger/php-array-query/actions/workflows/tests.yml/badge.svg)](https://github.com/philiprehberger/php-array-query/actions/workflows/tests.yml)
-[![Latest Version](https://img.shields.io/packagist/v/philiprehberger/php-array-query.svg)](https://packagist.org/packages/philiprehberger/php-array-query)
-[![License](https://img.shields.io/packagist/l/philiprehberger/php-array-query.svg)](LICENSE)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/philiprehberger/php-array-query.svg)](https://packagist.org/packages/philiprehberger/php-array-query)
+[![License](https://img.shields.io/github/license/philiprehberger/php-array-query)](LICENSE)
 
 SQL-like fluent query builder for filtering, sorting, and transforming arrays.
 
@@ -153,7 +153,7 @@ ArrayQuery::from($items)
 | `min(string $key)` | Minimum value of a key |
 | `max(string $key)` | Maximum value of a key |
 
-## Testing
+## Development
 
 ```bash
 composer install
@@ -164,4 +164,4 @@ vendor/bin/phpstan analyse
 
 ## License
 
-[MIT](LICENSE)
+MIT
