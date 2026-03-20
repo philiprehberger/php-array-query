@@ -8,8 +8,7 @@ SQL-like fluent query builder for filtering, sorting, and transforming arrays.
 
 ## Requirements
 
-- PHP ^8.2
-- No external dependencies
+- PHP 8.2+
 
 ## Installation
 
