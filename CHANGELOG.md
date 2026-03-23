@@ -1,8 +1,15 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to `php-array-query` will be documented in this file.
 
 ## [Unreleased]
+
+## [1.1.0] - 2026-03-22
+
+### Added
+- `distinct()` method for removing duplicate results
+- `chunk()` method for splitting results into sized batches
+- `contains` and `not_contains` filter operators for array membership checks
 
 ## [1.0.2] - 2026-03-17
 
